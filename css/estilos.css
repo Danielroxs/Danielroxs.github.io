@@ -1,0 +1,160 @@
+/* Fondo: Imagen original (nítida)
+  Capa intermedia: Elemento "invisible" con fondo blanquecino + blur (hace que la imagen se vea borrosa y con tinte blanco)
+  Frente: Contenido principal (nítido y legible) */
+
+/* 
+  Absolute: "Quiero control total para posicionarlo donde YO quiera"
+  Relative: "Quédate donde estás, solo necesito que funcione el z-index" */
+
+/* Capas del body (de atrás hacia adelante):
+  🖼️  background-image        ← Automáticamente atrás (sin z-index)
+  🔲  ::after (z-index: 0)     ← Encima del background
+  📄  .contenedor (z-index: 1) ← Encima de todo */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  /* Imagen de fondo original */
+  background-image: url("../img/david-b-t1JFqYIaVJs-unsplash.jpg");
+  background-size: cover;
+  background-position: top;
+
+  &::after {
+    content: ""; /* Crea un elemento invisible */
+    width: 100%; /* Ocupa toda la pantalla */
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.5); /* Filtro blanco semi-transparente */
+    position: fixed;
+    min-height: 100%; /* Se posiciona sobre la imagen */
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(50px); /* ¡Aquí está la magia del blur! */
+    z-index: 0; /* Capa de blur en el fondo */
+  }
+
+  .contenedor {
+    position: relative; /* Necesario para que z-index funcione */
+    z-index: 1; /* Contenido principal adelante */
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    padding: 40px 0;
+
+    .bio {
+      text-align: center;
+      margin-bottom: 40px;
+
+      .foto {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+
+      .nombre {
+        margin-bottom: 5px;
+        font-size: 32px;
+      }
+
+      .descripcion {
+        font-size: 18px;
+      }
+    }
+
+    .links {
+      .link {
+        color: black;
+        border: 3px solid #000;
+        border-radius: 10px;
+        text-align: center;
+        display: block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 20px;
+        font-weight: 700;
+        transition: 0.2s ease all;
+        box-shadow: 1px 1px 0px 0px black, 2px 2px 0px 0px black,
+          3px 3px 0px 0px black, 4px 4px 0px 0px black, 5px 5px 0px 0px black;
+        transform: translate(-5px, -5px);
+
+        &:hover {
+          color: #fff;
+          box-shadow: 0px 0px 0px 0px;
+          transform: translate(0px, 0px);
+        }
+
+        &.link-x:hover {
+          background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        }
+
+        &.sitio-web:hover {
+          background: linear-gradient(135deg, #0077b5 0%, #004182 100%);
+          color: #fff;
+        }
+
+        &.link-youtube:hover {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        &.link-instagram:hover {
+          background: linear-gradient(
+            135deg,
+            #f09433 0%,
+            #e6683c 25%,
+            #dc2743 50%,
+            #cc2366 75%,
+            #bc1888 100%
+          );
+        }
+
+        &.link-facebook:hover {
+          background: linear-gradient(135deg, #1877f2 0%, #0e4c92 100%);
+        }
+      }
+    }
+  }
+}
+
+/* Gradientes fijos en móviles */
+@media (max-width: 768px) {
+  body .contenedor .links {
+    .link {
+      color: #fff;
+
+      &.link-x {
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      }
+
+      &.sitio-web {
+        background: linear-gradient(135deg, #0077b5 0%, #004182 100%);
+      }
+
+      &.link-youtube {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      &.link-instagram {
+        background: linear-gradient(
+          135deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+      }
+
+      &.link-facebook {
+        background: linear-gradient(135deg, #1877f2 0%, #0e4c92 100%);
+      }
+    }
+  }
+}
