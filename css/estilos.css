@@ -118,6 +118,10 @@ body {
         &.link-facebook:hover {
           background: linear-gradient(135deg, #1877f2 0%, #0e4c92 100%);
         }
+
+        &.link-cv:hover {
+          background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
       }
     }
   }
@@ -154,6 +158,10 @@ body {
 
       &.link-facebook {
         background: linear-gradient(135deg, #1877f2 0%, #0e4c92 100%);
+      }
+
+      &.link-cv {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
       }
     }
   }
